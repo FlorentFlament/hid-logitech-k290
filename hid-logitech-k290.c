@@ -3,18 +3,17 @@
  *
  * Copyright (c) 2018 Florent Flament
  *
- * This drivers allows to configure the K290 keyboard's *function key*
+ * This drivers allows to configure the K290 keyboard's function key
  * behaviour (whether function mode is activated or not by default).
  *
- * Logitech custom commands taken from <SOURCE>:
+ * Logitech custom commands taken from Marcus Ilgner k290-fnkeyctl
+ * (https://github.com/milgner/k290-fnkeyctl):
  * K290_SET_FUNCTION_CMD
  * K290_SET_FUNCTION_VAL
  * K290_SET_FUNCTION_OFF
  * K290_SET_FUNCTION_ON
  *
- * Based on:
- * hid-accutouch.c
- * hid-elo.c
+ * Based on hid-accutouch.c and hid-elo.c
  *
  * This driver is licensed under the terms of GPLv2.
  */
@@ -38,9 +37,9 @@
 #define	K290_SET_FUNCTION_CMD 0x02
 #define K290_SET_FUNCTION_VAL 0x001a
 
-// Have *function mode* turned off by default (as with standard keyboards)
+// Have function mode turned off by default (as with standard keyboards)
 #define K290_SET_FUNCTION_OFF 0x0001
-// Have *function mode* turned on by default (default k290 behaviour)
+// Have function mode turned on by default (default k290 behaviour)
 #define K290_SET_FUNCTION_ON  0x0000
 
 // Function key default mode is set at module load time for every K290
