@@ -44,7 +44,7 @@
 #define K290_SET_FUNCTION_ON  0x0000
 
 static bool k290_mode = 0;
-module_param(k290_mode, bool, S_IRUGO | S_IWUSR );
+module_param(k290_mode, bool, S_IRUGO);
 MODULE_PARM_DESC(k290_mode, "Logitech K290 function key mode (default = 0)");
 
 static void k290_set_function(struct usb_device *dev, uint16_t function_mode)
