@@ -38,5 +38,11 @@ $ dmesg
 Note that if no parameter are provided when loading the module the
 function key will be activated by default.
 
+To have the driver always loaded with the appropriate parameter one
+can use the modprobe configuration mechanism:
+```
+$ sudo sh -c "echo 'options hid_logitech_k290 fn_mode=0' > /etc/modprobe.d/hid_logitech_k290.conf"
+```
+
 [1]: https://github.com/milgner/k290-fnkeyctl
 [2]: http://www.florentflament.com/blog/installing-a-vanilla-linux-kernel-on-fedora.html
