@@ -43,9 +43,11 @@
 // Have *function mode* turned on by default (default k290 behaviour)
 #define K290_SET_FUNCTION_ON  0x0000
 
-static bool k290_mode = 0;
-module_param(k290_mode, bool, S_IRUGO);
-MODULE_PARM_DESC(k290_mode, "Logitech K290 function key mode (default = 0)");
+// Function key default mode is set at module load time for every K290
+// keyboards plugged on the machine.
+static bool fn_mode = 1;
+module_param(fn_mode, bool, S_IRUGO);
+MODULE_PARM_DESC(fn_mode, "Logitech K290 function key mode (default = 1)");
 
 static void k290_set_function(struct usb_device *dev, uint16_t function_mode)
 {
@@ -66,7 +68,7 @@ static int k290_set_function_hid_device(struct hid_device *hid)
 {
 	struct usb_device *usb_dev = hid_to_usb_dev(hid);
 
-	k290_set_function(usb_dev, k290_mode ? K290_SET_FUNCTION_OFF : K290_SET_FUNCTION_ON);
+	k290_set_function(usb_dev, fn_mode ? K290_SET_FUNCTION_ON : K290_SET_FUNCTION_OFF);
 	return 0;
 }
 
