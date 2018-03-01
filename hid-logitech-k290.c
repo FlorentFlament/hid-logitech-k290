@@ -62,12 +62,22 @@ static void k290_set_function(struct usb_device *dev, uint16_t function_mode)
 	}
 }
 
-static int k290_input_configured(struct hid_device *hid, struct hid_input *hidinput)
+static int k290_set_function_hid_device(struct hid_device *hid)
 {
 	struct usb_device *usb_dev = hid_to_usb_dev(hid);
 
 	k290_set_function(usb_dev, k290_mode ? K290_SET_FUNCTION_OFF : K290_SET_FUNCTION_ON);
 	return 0;
+}
+
+static int k290_input_configured(struct hid_device *hid, struct hid_input *hidinput)
+{
+  return k290_set_function_hid_device(hid);
+}
+
+static int k290_resume(struct hid_device *hid)
+{
+  return k290_set_function_hid_device(hid);
 }
 
 static const struct hid_device_id k290_devices[] = {
@@ -80,6 +90,8 @@ static struct hid_driver k290_driver = {
 	.name = "hid-logitech-k290",
 	.id_table = k290_devices,
 	.input_configured = k290_input_configured,
+	.resume = k290_resume,
+	.reset_resume = k290_resume,
 };
 
 module_hid_driver(k290_driver);
