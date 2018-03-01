@@ -52,10 +52,10 @@ static void k290_set_function(struct usb_device *dev, uint16_t function_mode)
 	int ret;
 
 	ret = usb_control_msg(dev, usb_sndctrlpipe(dev, 0),
-			      K290_SET_FUNCTION_CMD,
-			      USB_DIR_OUT | USB_TYPE_VENDOR | USB_RECIP_DEVICE,
-			      K290_SET_FUNCTION_VAL,
-			      function_mode, 0, 0, USB_CTRL_SET_TIMEOUT);
+			K290_SET_FUNCTION_CMD,
+			USB_DIR_OUT | USB_TYPE_VENDOR | USB_RECIP_DEVICE,
+			K290_SET_FUNCTION_VAL,
+			function_mode, 0, 0, USB_CTRL_SET_TIMEOUT);
 
 	if (ret < 0) {
 		dev_err(&dev->dev, "Failed to setup K290 function key, error %d\n", ret);
@@ -72,12 +72,12 @@ static int k290_set_function_hid_device(struct hid_device *hid)
 
 static int k290_input_configured(struct hid_device *hid, struct hid_input *hidinput)
 {
-  return k290_set_function_hid_device(hid);
+	return k290_set_function_hid_device(hid);
 }
 
 static int k290_resume(struct hid_device *hid)
 {
-  return k290_set_function_hid_device(hid);
+	return k290_set_function_hid_device(hid);
 }
 
 static const struct hid_device_id k290_devices[] = {
